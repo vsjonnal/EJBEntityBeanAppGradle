@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weblogic-ejb-jar xmlns="http://xmlns.oracle.com/weblogic/weblogic-ejb-jar"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_1.xsd http://xmlns.oracle.com/weblogic/weblogic-ejb-jar http://xmlns.oracle.com/weblogic/weblogic-ejb-jar/1.4/weblogic-ejb-jar.xsd">
+  <weblogic-enterprise-bean>
+    <ejb-name>SessionBeanRemote</ejb-name>
+    <transaction-descriptor>
+      <trans-timeout-seconds>10</trans-timeout-seconds>
+    </transaction-descriptor>
+    <enable-call-by-reference>true</enable-call-by-reference>
+    <jndi-name>SessionBeanRemote</jndi-name>
+  </weblogic-enterprise-bean>
+  <weblogic-enterprise-bean>
+    <ejb-name>TraderHome</ejb-name>
+    <entity-descriptor>
+      <pool>
+        <max-beans-in-free-pool>100</max-beans-in-free-pool>
+      </pool>
+      <entity-cache>
+        <max-beans-in-cache>100</max-beans-in-cache>
+        <idle-timeout-seconds>1</idle-timeout-seconds>
+        <read-timeout-seconds>600</read-timeout-seconds>
+        <concurrency-strategy>Exclusive</concurrency-strategy>
+        <cache-between-transactions>false</cache-between-transactions>
+      </entity-cache>
+      <persistence>
+        <is-modified-method-name>isModified</is-modified-method-name>
+      </persistence>
+      <entity-clustering>
+        <home-load-algorithm>round-robin</home-load-algorithm>
+      </entity-clustering>
+    </entity-descriptor>
+    <transaction-descriptor>
+      <trans-timeout-seconds>5</trans-timeout-seconds>
+    </transaction-descriptor>
+    <resource-description>
+        <res-ref-name>jdbc/testPool</res-ref-name>
+        <jndi-name>weblogic.jdbc.jta.EntityTestPool</jndi-name>
+    </resource-description>
+    <enable-call-by-reference>True</enable-call-by-reference>
+    <jndi-name>TraderHome</jndi-name>
+  </weblogic-enterprise-bean>
+</weblogic-ejb-jar>
