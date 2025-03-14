@@ -2,11 +2,19 @@ plugins {
     id 'java'
     id 'war'
     id 'jacoco'
+    id("org.openrewrite.rewrite") version("7.1.4")
 }
 
 description = 'EJBEntityBeanAppGradle'
 repositories {
     mavenCentral()
+}
+
+rewrite {
+    activeRecipe("com.oracle.weblogic.rewrite.UpgradeTo1511")
+    activeRecipe("org.openrewrite.java.migrate.UpgradeToJava17")
+    activeRecipe("com.oracle.weblogic.rewrite.JakartaEE9_1")
+    setExportDatatables(true)
 }
 
 compileJava   {
@@ -16,6 +24,9 @@ compileJava   {
 
 dependencies {
     //compileOnly group: 'javax', name: 'javaee-api', version: '8.0'
+    rewrite("org.openrewrite.recipe:rewrite-migrate-java:3.2.0")
+    rewrite("com.oracle.weblogic.rewrite:rewrite-weblogic:+")
+
     compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
     compileOnly group: 'javax.ejb', name: 'javax.ejb-api', version: '3.2'
     implementation group: 'javax.annotation', name: 'javax.annotation-api', version: '1.3.2'
