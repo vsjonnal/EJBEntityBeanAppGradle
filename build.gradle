@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'war'
     id 'jacoco'
-    id("org.openrewrite.rewrite") version("7.1.4")
+    id("org.openrewrite.rewrite") version("7.2.0")
 }
 
 description = 'EJBEntityBeanAppGradle'
@@ -24,7 +24,7 @@ compileJava   {
 
 dependencies {
     //compileOnly group: 'javax', name: 'javaee-api', version: '8.0'
-    rewrite("org.openrewrite.recipe:rewrite-migrate-java:3.2.0")
+    rewrite("org.openrewrite.recipe:rewrite-migrate-java:3.4.0")
     rewrite("com.oracle.weblogic.rewrite:rewrite-weblogic:+")
 
     compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
